@@ -1,4 +1,4 @@
-# 🩺 Medical Appointment API
+# 🩺Dental Appointment API
 
 This API allows patients and doctors to register, log in, and manage appointments.  
 All responses follow a consistent structure with `code`, `data`, and (if applicable) `error` fields.
