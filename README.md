@@ -83,7 +83,7 @@ All responses follow a consistent structure with `code`, `data`, and (if applica
 ## 👨‍⚕️ Doctor Endpoints
 
 ### **3. Get Doctors**
-**Endpoint:** `GET /api/doctors`  
+**Endpoint:** `GET /api/doctor`  
 **Requires JWT:** ✅  
 **Description:** Retrieve a list of all doctors.
 
@@ -108,7 +108,7 @@ Authorization: Bearer <ACCESS_JWT>
 ## 📅 Appointment Endpoints
 
 ### **4. Get Appointments (by User)**
-**Endpoint:** `GET /api/appointments?user=:id`  
+**Endpoint:** `GET /api/appointment?user=:id`  
 **Requires JWT:** ✅  
 **Description:** Get a list of appointments for a specific user (doctor or patient).
 
@@ -154,7 +154,7 @@ Authorization: Bearer <ACCESS_JWT>
 ---
 
 ### **5. Check Doctor Availability**
-**Endpoint:** `GET /api/appointments/schedule?doctor=:id&date=:date`  
+**Endpoint:** `GET /api/appointment/schedule?doctor=:id&date=:date`  
 **Requires JWT:** ✅  
 **Description:** Retrieve booked slots for a doctor on a given date.
 
@@ -165,7 +165,7 @@ Authorization: Bearer <ACCESS_JWT>
 
 #### **Example Request**
 ```
-GET /api/appointments/schedule?doctor=12&date=2025-11-03
+GET /api/appointment/schedule?doctor=12&date=2025-11-03
 ```
 
 #### **Success Response**
@@ -188,7 +188,7 @@ GET /api/appointments/schedule?doctor=12&date=2025-11-03
 ---
 
 ### **6. Create Appointment**
-**Endpoint:** `POST /api/appointments`  
+**Endpoint:** `POST /api/appointment`  
 **Requires JWT:** ✅  
 **Body Required:** ✅  
 **Description:** Create a new appointment for a patient.
@@ -228,7 +228,7 @@ Authorization: Bearer <ACCESS_JWT>
 ---
 
 ### **7. Update Appointment**
-**Endpoint:** `PUT /api/appointments`  
+**Endpoint:** `PUT /api/appointment`  
 **Requires JWT:** ✅  
 **Body Required:** ✅  
 **Description:** Update an existing appointment.
@@ -274,8 +274,8 @@ Authorization: Bearer <ACCESS_JWT>
 |---|---------|-----------|---------------|------|--------------|
 | 1 | POST | `/auth/register` | ❌ | ✅ | Create new user |
 | 2 | POST | `/auth/login` | ❌ | ✅ | Login and get JWT |
-| 3 | GET | `/doctors` | ✅ | ❌ | List doctors |
-| 4 | GET | `/appointments?user=:id` | ✅ | ❌ | List appointments for user |
-| 5 | GET | `/appointments/schedule?doctor=:id&date=:date` | ✅ | ❌ | Check doctor’s schedule |
-| 6 | POST | `/appointments` | ✅ | ✅ | Create appointment |
-| 7 | PUT | `/appointments` | ✅ | ✅ | Update appointment |
+| 3 | GET | `/doctor` | ✅ | ❌ | List doctors |
+| 4 | GET | `/appointment?user=:id` | ✅ | ❌ | List appointments for user |
+| 5 | GET | `/appointment/schedule?doctor=:id&date=:date` | ✅ | ❌ | Check doctor’s schedule |
+| 6 | POST | `/appointment` | ✅ | ✅ | Create appointment |
+| 7 | PUT | `/appointment` | ✅ | ✅ | Update appointment |
