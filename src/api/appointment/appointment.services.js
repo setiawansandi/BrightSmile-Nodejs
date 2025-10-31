@@ -1,5 +1,5 @@
-const pool = require('../../db/db');
-const dayjs = require('dayjs');
+const pool = require("../../db/db");
+const dayjs = require("dayjs");
 
 exports.getAppointments = async (userId) => {
   const conn = await pool.getConnection();
@@ -29,37 +29,60 @@ exports.getAppointments = async (userId) => {
       data: rows,
       page: 1,
       limit: 50,
-      total: rows.length
+      total: rows.length,
     };
   } finally {
     conn.release();
   }
 };
 
-exports.getSchedule = async (doctorId, date) => {
-  if (!doctorId || !date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    throw new Error('invalid input');
+exports.getSchedule = async (doctorId, date, apptId) => {
+  if (!doctorId || !date || !apptId || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    throw new Error("invalid input");
   }
 
   const conn = await pool.getConnection();
   try {
+    // exclude cancelled; return id + patient_user_id to compute flags
     const [rows] = await conn.query(
-      `SELECT DATE_FORMAT(appt_time, '%H:%i') AS appt_time
-       FROM appointments
-       WHERE doctor_user_id = ? AND appt_date = ?`,
+      `
+      SELECT 
+        a.id,
+        TIME_FORMAT(a.appt_time, '%H:%i') AS time
+      FROM appointments a
+      WHERE a.doctor_user_id = ? 
+        AND a.appt_date = ?
+        AND a.status = 'confirmed'
+      `,
       [doctorId, date]
     );
 
-    const takenTimes = rows.map(r => r.appt_time);
-    return takenTimes;
+    const apptIdStr = String(apptId);
+    const data = rows.map(({ id, time }) => ({
+      slot: time,
+      is_mine: String(id) === apptIdStr,
+    }));
+
+    return {
+      code: 200,
+      data,
+    };
   } finally {
     conn.release();
   }
 };
 
-exports.createAppointment = async (patientId, { doctor_id, appt_date, appt_time }) => {
-  if (!doctor_id || !appt_date || !appt_time || !/^\d{4}-\d{2}-\d{2}$/.test(appt_date)) {
-    throw new Error('invalid input');
+exports.createAppointment = async (
+  patientId,
+  { doctor_id, appt_date, appt_time }
+) => {
+  if (
+    !doctor_id ||
+    !appt_date ||
+    !appt_time ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(appt_date)
+  ) {
+    throw new Error("invalid input");
   }
 
   const conn = await pool.getConnection();
@@ -76,9 +99,18 @@ exports.createAppointment = async (patientId, { doctor_id, appt_date, appt_time 
   }
 };
 
-exports.updateAppointment = async (patientId, { appt_id, doctor_id, appt_date, appt_time }) => {
-  if (!appt_id || !doctor_id || !appt_date || !appt_time || !/^\d{4}-\d{2}-\d{2}$/.test(appt_date)) {
-    throw new Error('invalid input');
+exports.updateAppointment = async (
+  patientId,
+  { appt_id, doctor_id, appt_date, appt_time }
+) => {
+  if (
+    !appt_id ||
+    !doctor_id ||
+    !appt_date ||
+    !appt_time ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(appt_date)
+  ) {
+    throw new Error("invalid input");
   }
 
   const conn = await pool.getConnection();
