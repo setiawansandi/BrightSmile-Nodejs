@@ -30,13 +30,13 @@ exports.getSchedule = async (req, res, next) => {
     const date = req.query.date;
     const apptId = parseInt(req.query.apptId, 10);
 
-    const bookedTimes = await appointmentService.getSchedule(
+    const result = await appointmentService.getSchedule(
       doctorId,
       date,
       apptId,
     );
 
-    res.status(200).json(bookedTimes);
+    res.status(200).json({ code: 200, data: result });
   } catch (err) {
     if (err.message === "invalid input") {
       return res.status(400).json({ error: "invalid input" });

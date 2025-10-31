@@ -63,10 +63,7 @@ exports.getSchedule = async (doctorId, date, apptId) => {
       is_mine: String(id) === apptIdStr,
     }));
 
-    return {
-      code: 200,
-      data,
-    };
+    return data
   } finally {
     conn.release();
   }
