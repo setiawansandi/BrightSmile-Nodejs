@@ -124,7 +124,7 @@ Authorization: Bearer <ACCESS_JWT>
 ### **4. Get Doctors**
 
 **Endpoint:** `GET /api/doctor`  
-**Requires JWT:** ✅  
+**Requires JWT:** ❌  
 **Description:** Retrieve a list of all doctors with info
 
 #### **Headers**
