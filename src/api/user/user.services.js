@@ -11,7 +11,8 @@ exports.getUserById = async (userId) => {
         last_name AS lastName,
         DATE_FORMAT(dob, '%Y-%m-%d') AS dob,
         avatar_url AS avatarUrl,
-        phone
+        phone,
+        is_doctor
       FROM users
       WHERE id = ?
       `,

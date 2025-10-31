@@ -112,7 +112,8 @@ Authorization: Bearer <ACCESS_JWT>
     "lastName": "Doe",
     "dob": "1990-05-15",
     "avatarUrl": "https://example.com/avatars/john.png",
-    "phone": "+1234567890"
+    "phone": "+1234567890",
+    "is_doctor": 0
   }
 }
 ```
