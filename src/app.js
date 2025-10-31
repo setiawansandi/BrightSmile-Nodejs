@@ -16,11 +16,13 @@ app.use(morgan('dev'));
 const appointmentRoutes = require('./api/appointment/appointment.routes');
 const authRoutes = require('./api/auth/auth.routes');
 const doctorRoutes = require('./api/doctor/doctor.routes');
+const userRoutes = require("./api/user/user.routes");
 
 // API Routes
 app.use('/api/appointment', appointmentRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/doctor', doctorRoutes);
+app.use("/api/user", userRoutes);
 
 // Health check route
 app.get('/', (req, res) => {

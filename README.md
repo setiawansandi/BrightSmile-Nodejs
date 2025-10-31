@@ -87,9 +87,40 @@ All responses follow a consistent structure with `code`, `data`, and (if applica
 
 ---
 
+## 👤 User Endpoints
+
+### **3. Get User Profile**
+
+**Endpoint:** `GET /api/user`  
+**Requires JWT:** ✅  
+**Description:** Retrieve the currently logged-in user's profile information.
+
+#### **Headers**
+
+```
+Authorization: Bearer <ACCESS_JWT>
+```
+
+#### **Success Response**
+
+```json
+{
+  "code": 200,
+  "data": {
+    "email": "john.doe@example.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "dob": "1990-05-15",
+    "avatarUrl": "https://example.com/avatars/john.png",
+    "phone": "+1234567890"
+  }
+}
+```
+
+
 ## 👨‍⚕️ Doctor Endpoints
 
-### **3. Get Doctors**
+### **4. Get Doctors**
 
 **Endpoint:** `GET /api/doctor`  
 **Requires JWT:** ✅  
@@ -130,7 +161,7 @@ Authorization: Bearer <ACCESS_JWT>
 
 ## 📅 Appointment Endpoints
 
-### **4. Get Appointments (by User)**
+### **5. Get Appointments (by User)**
 
 **Endpoint:** `GET /api/appointment?user=:id`  
 **Requires JWT:** ✅  
@@ -179,7 +210,7 @@ Authorization: Bearer <ACCESS_JWT>
 
 ---
 
-### **5. Check Doctor Availability**
+### **6. Check Doctor Availability**
 
 **Endpoint:** `GET /api/appointment/schedule?doctor=:id&date=:date&apptId:id`  
 **Requires JWT:** ✅  
@@ -222,7 +253,7 @@ GET /api/appointment/schedule?doctor=2&date=2025-11-28&apptId=14
 
 ---
 
-### **6. Create Appointment**
+### **7. Create Appointment**
 
 **Endpoint:** `POST /api/appointment`  
 **Requires JWT:** ✅  
@@ -268,7 +299,7 @@ Authorization: Bearer <ACCESS_JWT>
 
 ---
 
-### **7. Update Appointment**
+### **8. Update Appointment**
 
 **Endpoint:** `PUT /api/appointment`  
 **Requires JWT:** ✅  
@@ -321,8 +352,10 @@ Authorization: Bearer <ACCESS_JWT>
 | --- | ------ | --------------------------------------------- | ------------ | ---- | -------------------------- |
 | 1   | POST   | `/auth/register`                              | ❌           | ✅   | Create new user            |
 | 2   | POST   | `/auth/login`                                 | ❌           | ✅   | Login and get JWT          |
-| 3   | GET    | `/doctor`                                     | ✅           | ❌   | List doctors               |
-| 4   | GET    | `/appointment?user=:id`                       | ✅           | ❌   | List appointments for user |
-| 5   | GET    | `/appointment/schedule?doctor=:id&date=:date` | ✅           | ❌   | Check doctor’s schedule    |
-| 6   | POST   | `/appointment`                                | ✅           | ✅   | Create appointment         |
-| 7   | PUT    | `/appointment`                                | ✅           | ✅   | Update appointment         |
+| 3   | GET    | `/user`                                       | ✅           | ❌   | Get logged-in user profile |
+| 4   | GET    | `/doctor`                                     | ✅           | ❌   | List doctors               |
+| 5   | GET    | `/appointment?user=:id`                       | ✅           | ❌   | List appointments for user |
+| 6   | GET    | `/appointment/schedule?doctor=:id&date=:date` | ✅           | ❌   | Check doctor’s schedule    |
+| 7   | POST   | `/appointment`                                | ✅           | ✅   | Create appointment         |
+| 8   | PUT    | `/appointment`                                | ✅           | ✅   | Update appointment         |
+
