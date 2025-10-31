@@ -8,12 +8,14 @@ All responses follow a consistent structure with `code`, `data`, and (if applica
 ## 🔐 Authentication Endpoints
 
 ### **1. Register**
+
 **Endpoint:** `POST /api/auth/register`  
 **Requires JWT:** ❌  
 **Body Required:** ✅  
 **Description:** Create a new user account.
 
 #### **Request**
+
 ```json
 {
   "firstName": "Alice",
@@ -26,6 +28,7 @@ All responses follow a consistent structure with `code`, `data`, and (if applica
 ```
 
 #### **Success Response**
+
 ```json
 {
   "code": 200,
@@ -42,6 +45,7 @@ All responses follow a consistent structure with `code`, `data`, and (if applica
 ```
 
 #### **Error Response**
+
 ```json
 { "code": 400, "error": "invalid input" }
 ```
@@ -49,12 +53,14 @@ All responses follow a consistent structure with `code`, `data`, and (if applica
 ---
 
 ### **2. Login**
+
 **Endpoint:** `POST /api/auth/login`  
 **Requires JWT:** ❌  
 **Body Required:** ✅  
 **Description:** Authenticate user and retrieve JWT.
 
 #### **Request**
+
 ```json
 {
   "email": "alice@example.com",
@@ -63,6 +69,7 @@ All responses follow a consistent structure with `code`, `data`, and (if applica
 ```
 
 #### **Success Response**
+
 ```json
 {
   "code": 200,
@@ -83,22 +90,36 @@ All responses follow a consistent structure with `code`, `data`, and (if applica
 ## 👨‍⚕️ Doctor Endpoints
 
 ### **3. Get Doctors**
+
 **Endpoint:** `GET /api/doctor`  
 **Requires JWT:** ✅  
-**Description:** Retrieve a list of all doctors.
+**Description:** Retrieve a list of all doctors with info
 
 #### **Headers**
+
 ```
 Authorization: Bearer <ACCESS_JWT>
 ```
 
 #### **Success Response**
+
 ```json
 {
   "code": 200,
   "data": [
-    { "doctor_id": 1, "doctor_name": "Nicholas Bedasso" },
-    { "doctor_id": 2, "doctor_name": "Bond Burger" }
+    {
+      "doctor_id": 1,
+      "doctor_name": "Nicholas Bedasso",
+      "specialization": "General Dentistry",
+      "bio": "Dr Nicholas Bidasso graduated from the University of Melbourne, Australia, with a Bachelor of Dental Surgery. He returned to Singapore and served his bond in the public sector, gaining broad experience at various polyclinics and the Health Promotion Board. This period provided him with a strong foundation in community dental care, preventive dentistry, and managing patients of all ages. After his public service, he transitioned to private practice before joining SmileFocus Dental. Dr Bidasso is a firm believer in patient-first dentistry, emphasizing clear communication and gentle care to help anxious patients feel comfortable."
+    },
+    {
+      "doctor_id": 3,
+      "doctor_name": "Zhang Jing",
+      "specialization": "Orthodontics",
+      "bio": "Dr Zhang Jing received his Bachelor of Dental Surgery from the National University of Singapore (NUS). After a few years in general practice, he pursued his specialist training and obtained a Master of Dental Surgery in Orthodontics from NUS. He is a registered specialist with the Singapore Dental Council and practiced at the National Dental Centre Singapore, handling complex braces and aligner cases. Dr. Zhang is passionate about the functional and aesthetic benefits of a well-aligned bite. He is dedicated to using modern digital technologies to create precise, effective treatment plans for both children and adults."
+    },
+    ...
   ]
 }
 ```
@@ -108,16 +129,19 @@ Authorization: Bearer <ACCESS_JWT>
 ## 📅 Appointment Endpoints
 
 ### **4. Get Appointments (by User)**
+
 **Endpoint:** `GET /api/appointment?user=:id`  
 **Requires JWT:** ✅  
 **Description:** Get a list of appointments for a specific user (doctor or patient).
 
 #### **Headers**
+
 ```
 Authorization: Bearer <ACCESS_JWT>
 ```
 
 #### **Success Response (Doctor View)**
+
 ```json
 {
   "code": 200,
@@ -154,21 +178,25 @@ Authorization: Bearer <ACCESS_JWT>
 ---
 
 ### **5. Check Doctor Availability**
+
 **Endpoint:** `GET /api/appointment/schedule?doctor=:id&date=:date&apptId:id`  
 **Requires JWT:** ✅  
 **Description:** Retrieve booked appointment slots for a given doctor and date. Each item indicates the booked time (slot) and whether the booking belongs to the caller (is_mine).
 
 #### **Headers**
+
 ```
 Authorization: Bearer <ACCESS_JWT>
 ```
 
 #### **Example Request**
+
 ```
 GET /api/appointment/schedule?doctor=2&date=2025-11-28&apptId=14
 ```
 
 #### **Success Response**
+
 ```json
 {
   "code": 200,
@@ -181,6 +209,7 @@ GET /api/appointment/schedule?doctor=2&date=2025-11-28&apptId=14
 ```
 
 #### **Error Responses**
+
 ```json
 { "code": 400, "error": "invalid input" }
 ```
@@ -192,17 +221,20 @@ GET /api/appointment/schedule?doctor=2&date=2025-11-28&apptId=14
 ---
 
 ### **6. Create Appointment**
+
 **Endpoint:** `POST /api/appointment`  
 **Requires JWT:** ✅  
 **Body Required:** ✅  
 **Description:** Create a new appointment for a patient.
 
 #### **Headers**
+
 ```
 Authorization: Bearer <ACCESS_JWT>
 ```
 
 #### **Request**
+
 ```json
 {
   "doctor_id": 12,
@@ -212,6 +244,7 @@ Authorization: Bearer <ACCESS_JWT>
 ```
 
 #### **Success Response**
+
 ```json
 {
   "code": 200,
@@ -222,9 +255,11 @@ Authorization: Bearer <ACCESS_JWT>
 ```
 
 #### **Error Responses**
+
 ```json
 { "code": 400, "error": "invalid input" }
 ```
+
 ```json
 { "code": 500, "error": "server error" }
 ```
@@ -232,17 +267,20 @@ Authorization: Bearer <ACCESS_JWT>
 ---
 
 ### **7. Update Appointment**
+
 **Endpoint:** `PUT /api/appointment`  
 **Requires JWT:** ✅  
 **Body Required:** ✅  
 **Description:** Update an existing appointment.
 
 #### **Headers**
+
 ```
 Authorization: Bearer <ACCESS_JWT>
 ```
 
 #### **Request**
+
 ```json
 {
   "appt_id": 231,
@@ -253,6 +291,7 @@ Authorization: Bearer <ACCESS_JWT>
 ```
 
 #### **Success Response**
+
 ```json
 {
   "code": 200,
@@ -263,9 +302,11 @@ Authorization: Bearer <ACCESS_JWT>
 ```
 
 #### **Error Responses**
+
 ```json
 { "code": 400, "error": "invalid input" }
 ```
+
 ```json
 { "code": 500, "error": "server error" }
 ```
@@ -274,12 +315,12 @@ Authorization: Bearer <ACCESS_JWT>
 
 ## 📘 Summary Table
 
-| # | Method | Endpoint | Requires JWT | Body | Description |
-|---|---------|-----------|---------------|------|--------------|
-| 1 | POST | `/auth/register` | ❌ | ✅ | Create new user |
-| 2 | POST | `/auth/login` | ❌ | ✅ | Login and get JWT |
-| 3 | GET | `/doctor` | ✅ | ❌ | List doctors |
-| 4 | GET | `/appointment?user=:id` | ✅ | ❌ | List appointments for user |
-| 5 | GET | `/appointment/schedule?doctor=:id&date=:date` | ✅ | ❌ | Check doctor’s schedule |
-| 6 | POST | `/appointment` | ✅ | ✅ | Create appointment |
-| 7 | PUT | `/appointment` | ✅ | ✅ | Update appointment |
+| #   | Method | Endpoint                                      | Requires JWT | Body | Description                |
+| --- | ------ | --------------------------------------------- | ------------ | ---- | -------------------------- |
+| 1   | POST   | `/auth/register`                              | ❌           | ✅   | Create new user            |
+| 2   | POST   | `/auth/login`                                 | ❌           | ✅   | Login and get JWT          |
+| 3   | GET    | `/doctor`                                     | ✅           | ❌   | List doctors               |
+| 4   | GET    | `/appointment?user=:id`                       | ✅           | ❌   | List appointments for user |
+| 5   | GET    | `/appointment/schedule?doctor=:id&date=:date` | ✅           | ❌   | Check doctor’s schedule    |
+| 6   | POST   | `/appointment`                                | ✅           | ✅   | Create appointment         |
+| 7   | PUT    | `/appointment`                                | ✅           | ✅   | Update appointment         |

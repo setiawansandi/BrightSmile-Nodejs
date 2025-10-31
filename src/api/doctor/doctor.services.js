@@ -6,13 +6,15 @@ exports.getAllDoctors = async () => {
     const [rows] = await conn.query(`
       SELECT 
         d.user_id AS doctor_id,
-        CONCAT(u.first_name, ' ', u.last_name) AS doctor_name
+        CONCAT(u.first_name, ' ', u.last_name) AS doctor_name,
+        d.specialization,
+        d.bio
       FROM doctors d
       JOIN users u ON d.user_id = u.id
       ORDER BY u.last_name, u.first_name
     `);
 
-    return rows;
+    return rows
   } finally {
     conn.release();
   }
