@@ -165,7 +165,7 @@ Authorization: Bearer <ACCESS_JWT>
 
 #### **Example Request**
 ```
-GET /api/appointment/schedule?doctor=12&date=2025-11-03
+GET /api/appointment/schedule?doctor=2&date=2025-11-28&apptId=14
 ```
 
 #### **Success Response**
