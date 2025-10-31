@@ -110,12 +110,14 @@ Authorization: Bearer <ACCESS_JWT>
     {
       "doctor_id": 1,
       "doctor_name": "Nicholas Bedasso",
+      "avatar_url": "assets/images/doc1.png",
       "specialization": "General Dentistry",
       "bio": "Dr Nicholas Bidasso graduated from the University of Melbourne, Australia, with a Bachelor of Dental Surgery. He returned to Singapore and served his bond in the public sector, gaining broad experience at various polyclinics and the Health Promotion Board. This period provided him with a strong foundation in community dental care, preventive dentistry, and managing patients of all ages. After his public service, he transitioned to private practice before joining SmileFocus Dental. Dr Bidasso is a firm believer in patient-first dentistry, emphasizing clear communication and gentle care to help anxious patients feel comfortable."
     },
     {
       "doctor_id": 3,
       "doctor_name": "Zhang Jing",
+      "avatar_url": "assets/images/doc3.png",
       "specialization": "Orthodontics",
       "bio": "Dr Zhang Jing received his Bachelor of Dental Surgery from the National University of Singapore (NUS). After a few years in general practice, he pursued his specialist training and obtained a Master of Dental Surgery in Orthodontics from NUS. He is a registered specialist with the Singapore Dental Council and practiced at the National Dental Centre Singapore, handling complex braces and aligner cases. Dr. Zhang is passionate about the functional and aesthetic benefits of a well-aligned bite. He is dedicated to using modern digital technologies to create precise, effective treatment plans for both children and adults."
     },

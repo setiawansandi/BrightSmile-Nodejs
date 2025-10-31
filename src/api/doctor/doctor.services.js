@@ -7,6 +7,7 @@ exports.getAllDoctors = async () => {
       SELECT 
         d.user_id AS doctor_id,
         CONCAT(u.first_name, ' ', u.last_name) AS doctor_name,
+        u.avatar_url,
         d.specialization,
         d.bio
       FROM doctors d
@@ -14,7 +15,7 @@ exports.getAllDoctors = async () => {
       ORDER BY u.last_name, u.first_name
     `);
 
-    return rows
+    return rows;
   } finally {
     conn.release();
   }
