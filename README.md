@@ -154,9 +154,9 @@ Authorization: Bearer <ACCESS_JWT>
 ---
 
 ### **5. Check Doctor Availability**
-**Endpoint:** `GET /api/appointment/schedule?doctor=:id&date=:date`  
+**Endpoint:** `GET /api/appointment/schedule?doctor=:id&date=:date&apptId:id`  
 **Requires JWT:** ✅  
-**Description:** Retrieve booked slots for a doctor on a given date.
+**Description:** Retrieve booked appointment slots for a given doctor and date. Each item indicates the booked time (slot) and whether the booking belongs to the caller (is_mine).
 
 #### **Headers**
 ```
@@ -172,7 +172,11 @@ GET /api/appointment/schedule?doctor=12&date=2025-11-03
 ```json
 {
   "code": 200,
-  "data": ["09:00", "10:00", "15:00"]
+  "data": [
+    { "slot": "09:00", "is_mine": false },
+    { "slot": "10:00", "is_mine": false },
+    { "slot": "15:00", "is_mine": true }
+  ]
 }
 ```
 
