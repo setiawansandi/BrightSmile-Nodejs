@@ -37,7 +37,8 @@ All responses follow a consistent structure with `code`, `data`, and (if applica
       "id": 1,
       "firstName": "Alice",
       "lastName": "Smith",
-      "email": "alice@example.com"
+      "email": "alice@example.com",
+      "avatarUrl": null
     },
     "token": "eyJhbGciOiJIUzI1NiIsInR5..."
   }
@@ -78,7 +79,8 @@ All responses follow a consistent structure with `code`, `data`, and (if applica
       "id": 1,
       "firstName": "Alice",
       "lastName": "Smith",
-      "email": "alice@example.com"
+      "email": "alice@example.com",
+      "avatarUrl": "assets/images/user1.png"
     },
     "token": "eyJhbGciOiJIUzI1NiIsInR5..."
   }
@@ -117,7 +119,6 @@ Authorization: Bearer <ACCESS_JWT>
   }
 }
 ```
-
 
 ## 👨‍⚕️ Doctor Endpoints
 
@@ -359,4 +360,3 @@ Authorization: Bearer <ACCESS_JWT>
 | 6   | GET    | `/appointment/schedule?doctor=:id&date=:date` | ✅           | ❌   | Check doctor’s schedule    |
 | 7   | POST   | `/appointment`                                | ✅           | ✅   | Create appointment         |
 | 8   | PUT    | `/appointment`                                | ✅           | ✅   | Update appointment         |
-

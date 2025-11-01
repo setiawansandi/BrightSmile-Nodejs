@@ -43,7 +43,7 @@ exports.register = async ({
     );
 
     return {
-      user: { id: userId, firstName, lastName, email },
+      user: { id: userId, firstName, lastName, email, avatarUrl: null },
       token,
     };
   } finally {
@@ -57,7 +57,7 @@ exports.login = async ({ email, password }) => {
   const conn = await pool.getConnection();
   try {
     const [rows] = await conn.query(
-      `SELECT id, email, password_hash, first_name, last_name, is_doctor
+      `SELECT id, email, password_hash, first_name, last_name, is_doctor, avatar_url
        FROM users WHERE email = ?`,
       [email]
     );
@@ -86,6 +86,7 @@ exports.login = async ({ email, password }) => {
         firstName: user.first_name,
         lastName: user.last_name,
         email: user.email,
+        avatarUrl: user.avatar_url
       },
       token,
     };
