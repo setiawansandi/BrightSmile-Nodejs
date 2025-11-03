@@ -115,7 +115,7 @@ exports.updateAppointment = async (
     await conn.query(
       `UPDATE appointments
        SET doctor_user_id = ?, appt_date = ?, appt_time = ?
-       WHERE id = ? AND patient_user_id = ?`,
+       WHERE id = ? `,
       [doctor_id, appt_date, appt_time, appt_id, patientId]
     );
 
